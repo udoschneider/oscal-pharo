@@ -145,8 +145,8 @@ OSCALMetadata >> descriptionRemarks [
 
 { #category : #'magritte-description' }
 OSCALMetadata >> descriptionResponsibleParties [
-	"<magritteDescription>"
-	^ MAToManyRelationDescription new
+	<magritteDescription>
+	^ MAMapDescription new
 		label: 'Responsible Parties' asMultilanguageString;
 		comment:
 			'A reference to a set of organizations or persons that have responsibility for performing a referenced role relative to the parent context.';
@@ -294,6 +294,16 @@ OSCALMetadata >> remarks [
 { #category : #accessing }
 OSCALMetadata >> remarks: aMarkupMultiline [
 	remarks := aMarkupMultiline
+]
+
+{ #category : #accessing }
+OSCALMetadata >> responsibleParties [
+	^ responsibleParties
+]
+
+{ #category : #accessing }
+OSCALMetadata >> responsibleParties: aCollection [
+	responsibleParties := aCollection
 ]
 
 { #category : #accessing }
