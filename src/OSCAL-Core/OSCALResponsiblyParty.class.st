@@ -13,7 +13,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OSCALResponsiblyParty class >> configureClassMapper: mapper [
+OSCALResponsiblyParty class >> mapToJsonMapper: mapper [
 	mapper
 		for: self
 		do: [ :mapping | 

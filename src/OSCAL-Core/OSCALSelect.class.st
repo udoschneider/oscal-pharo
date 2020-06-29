@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OSCALSelect class >> configureClassMapper: mapper [
+OSCALSelect class >> mapToJsonMapper: mapper [
 	mapper
 		for: self
 		do: [ :mapping | 
@@ -17,19 +17,47 @@ OSCALSelect class >> configureClassMapper: mapper [
 			(mapping mapInstVar: #alternatives) valueSchema: #'array-of-choice' ]
 ]
 
+{ #category : #accessing }
+OSCALSelect >> alternatives [
+	^ alternatives
+]
+
+{ #category : #accessing }
+OSCALSelect >> alternatives: aCollection [
+	alternatives := aCollection
+]
+
 { #category : #'as yet unclassified' }
-OSCALSelect >> printOn: aStream [
-	super printOn: aStream.
-	aStream
-		space;
-		nextPut: $(.
-	howMany
-		ifNotNil: [ :countString | 
-			aStream
-				nextPutAll: countString;
-				nextPutAll: ' of ' ].
-	alternatives
-		do: [ :alternative | aStream nextPutAll: alternative trim ]
-		separatedBy: [ aStream nextPut: $/ ].
-	aStream nextPut: $)
+OSCALSelect >> descriptionAlternatives [
+	<magritteDescription>
+	^ MAToManyScalarRelationDescription new
+		label: 'Alternatives' asMultilanguageString;
+		comment: 'A value selection among several such options';
+		accessor: #alternatives;
+		classes: (Array with: MarkupLine);
+		beJsonMapped;
+		priority: 20;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+OSCALSelect >> descriptionHowMany [
+	<magritteDescription>
+	^ MAStringDescription new
+		label: 'How many' asMultilanguageString;
+		comment: 'When selecting, a requirement such as one or more';
+		accessor: #howMany;
+		beJsonMapped;
+		jsonProperty: 'how-many';
+		yourself
+]
+
+{ #category : #accessing }
+OSCALSelect >> howMany [
+	^ howMany
+]
+
+{ #category : #accessing }
+OSCALSelect >> howMany: aString [
+	howMany := aString
 ]

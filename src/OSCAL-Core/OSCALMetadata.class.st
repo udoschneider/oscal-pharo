@@ -21,7 +21,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OSCALMetadata class >> configureClassMapper: mapper [
+OSCALMetadata class >> mapToJsonMapper: mapper [
 	mapper
 		for: self
 		do: [ :mapping | 
@@ -46,14 +46,174 @@ OSCALMetadata class >> configureClassMapper: mapper [
 			self ]
 ]
 
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionDocumentIds [
+	<magritteDescription>
+	^ super descriptionDocumentIds
+		priority: 70;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionLastModified [
+	<magritteDescription>
+	^ MADateAndTimeDescription new
+		label: 'Last Modified' asMultilanguageString;
+		comment: 'Date and time of last modification.';
+		accessor: #lastModified;
+		priority: 30;
+		beJsonMapped;
+		jsonProperty: 'last-modified';
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionLinks [
+	<magritteDescription>
+	^ super descriptionLinks
+		priority: 90;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionLocations [
+	<magritteDescription>
+	^ MAToManyRelationDescription new
+		label: 'Locations' asMultilanguageString;
+		comment: 'A location, with associated metadata that can be referenced.';
+		accessor: #locations;
+		priority: 110;
+		classes: (Array with: OSCALLocation);
+		beJsonMapped;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionOscalVersion [
+	<magritteDescription>
+	^ MAStringDescription new
+		label: 'OSCAL Version' asMultilanguageString;
+		comment: 'OSCAL model version.';
+		accessor: #oscalVersion;
+		priority: 50;
+		beJsonMapped;
+		jsonProperty: 'oscal-version';
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionParties [
+	<magritteDescription>
+	^ MAToManyRelationDescription new
+		label: 'Parties' asMultilanguageString;
+		comment:
+			'A responsible entity, either singular (an organization or person) or collective (multiple persons)';
+		accessor: #parties;
+		priority: 120;
+		classes: (Array with: OSCALParty);
+		beJsonMapped;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionProperties [
+	<magritteDescription>
+	^ super descriptionProperties
+		priority: 80;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionPublished [
+	<magritteDescription>
+	^ MADateAndTimeDescription new
+		label: 'Published' asMultilanguageString;
+		comment: 'The date and time this document was published.';
+		accessor: #published;
+		priority: 20;
+		beJsonMapped;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionRemarks [
+	<magritteDescription>
+	^ super descriptionRemarks
+		priority: 150;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionResponsibleParties [
+	"<magritteDescription>"
+	^ MAToManyRelationDescription new
+		label: 'Responsible Parties' asMultilanguageString;
+		comment:
+			'A reference to a set of organizations or persons that have responsibility for performing a referenced role relative to the parent context.';
+		accessor: #responsibleParties;
+		priority: 130;
+		classes: (Array with: OSCALResponsiblyParty);
+		beJsonMapped;
+		jsonProperty: 'responsible-parties';
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionRevisionHistory [
+	<magritteDescription>
+	^ MAToManyRelationDescription new
+		label: 'Revision History' asMultilanguageString;
+		comment:
+			'An entry in a sequential list of revisions to the containing document in reverse chronological order (i.e., most recent previous revision';
+		accessor: #revisionHistory;
+		priority: 60;
+		classes: (Array with: OSCALRevision);
+		beJsonMapped;
+		jsonProperty: 'revision-history';
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionRoles [
+	<magritteDescription>
+	^ MAToManyRelationDescription new
+		label: 'Roles' asMultilanguageString;
+		comment: 'Defining a role to be assigned to a party';
+		accessor: #roles;
+		priority: 100;
+		classes: (Array with: OSCALRole);
+		beJsonMapped;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionTitle [
+	<magritteDescription>
+	^ super descriptionTitle
+		priority: 10;
+		yourself
+]
+
+{ #category : #'magritte-description' }
+OSCALMetadata >> descriptionVersion [
+	<magritteDescription>
+	^ MAStringDescription new
+		label: 'Version' asMultilanguageString;
+		comment: 'The version of the document content.';
+		accessor: #version;
+		priority: 40;
+		beJsonMapped;
+		yourself
+]
+
 { #category : #accessing }
 OSCALMetadata >> documentIds [
 	^ documentIds
 ]
 
 { #category : #accessing }
-OSCALMetadata >> documentIds: anObject [
-	documentIds := anObject
+OSCALMetadata >> documentIds: aCollection [
+	documentIds := aCollection
 ]
 
 { #category : #accessing }
@@ -62,8 +222,8 @@ OSCALMetadata >> lastModified [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> lastModified: anObject [
-	lastModified := anObject
+OSCALMetadata >> lastModified: aDateAndTime [
+	lastModified := aDateAndTime
 ]
 
 { #category : #accessing }
@@ -72,8 +232,8 @@ OSCALMetadata >> links [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> links: anObject [
-	links := anObject
+OSCALMetadata >> links: aCollection [
+	links := aCollection
 ]
 
 { #category : #accessing }
@@ -82,8 +242,8 @@ OSCALMetadata >> locations [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> locations: anObject [
-	locations := anObject
+OSCALMetadata >> locations: aCollection [
+	locations := aCollection
 ]
 
 { #category : #accessing }
@@ -92,8 +252,8 @@ OSCALMetadata >> oscalVersion [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> oscalVersion: anObject [
-	oscalVersion := anObject
+OSCALMetadata >> oscalVersion: aCollection [
+	oscalVersion := aCollection
 ]
 
 { #category : #accessing }
@@ -102,18 +262,8 @@ OSCALMetadata >> parties [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> parties: anObject [
-	parties := anObject
-]
-
-{ #category : #printing }
-OSCALMetadata >> printOn: aStream [
-	super printOn: aStream.
-	aStream
-		space;
-		nextPut: $(;
-		nextPutAll: title;
-		nextPut: $)
+OSCALMetadata >> parties: aCollection [
+	parties := aCollection
 ]
 
 { #category : #accessing }
@@ -122,8 +272,8 @@ OSCALMetadata >> properties [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> properties: anObject [
-	properties := anObject
+OSCALMetadata >> properties: aCollection [
+	properties := aCollection
 ]
 
 { #category : #accessing }
@@ -132,8 +282,8 @@ OSCALMetadata >> published [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> published: anObject [
-	published := anObject
+OSCALMetadata >> published: aDateAndTime [
+	published := aDateAndTime
 ]
 
 { #category : #accessing }
@@ -142,18 +292,8 @@ OSCALMetadata >> remarks [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> remarks: anObject [
-	remarks := anObject
-]
-
-{ #category : #accessing }
-OSCALMetadata >> responsibleParty [
-	^ responsibleParty
-]
-
-{ #category : #accessing }
-OSCALMetadata >> responsibleParty: anObject [
-	responsibleParty := anObject
+OSCALMetadata >> remarks: aMarkupMultiline [
+	remarks := aMarkupMultiline
 ]
 
 { #category : #accessing }
@@ -162,8 +302,8 @@ OSCALMetadata >> revisionHistory [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> revisionHistory: anObject [
-	revisionHistory := anObject
+OSCALMetadata >> revisionHistory: aCollection [
+	revisionHistory := aCollection
 ]
 
 { #category : #accessing }
@@ -172,8 +312,8 @@ OSCALMetadata >> roles [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> roles: anObject [
-	roles := anObject
+OSCALMetadata >> roles: aCollection [
+	roles := aCollection
 ]
 
 { #category : #accessing }
@@ -182,8 +322,8 @@ OSCALMetadata >> title [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> title: anObject [
-	title := anObject
+OSCALMetadata >> title: aMarkupLine [
+	title := aMarkupLine
 ]
 
 { #category : #accessing }
@@ -192,6 +332,6 @@ OSCALMetadata >> version [
 ]
 
 { #category : #accessing }
-OSCALMetadata >> version: anObject [
-	version := anObject
+OSCALMetadata >> version: aString [
+	version := aString
 ]

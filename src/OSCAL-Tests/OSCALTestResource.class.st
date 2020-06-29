@@ -20,8 +20,8 @@ OSCALTestResource >> minCatalog [
 
 { #category : #accessing }
 OSCALTestResource >> setUp [
-	fullCatalog := OSCALObject nist_sp_800_53_rev4_catalog_min.
-	minCatalog := OSCALObject nist_sp_800_53_rev4_catalog
+	fullCatalog := OSCALObject nistSp800_53Rev4CatalogMinContents.
+	minCatalog := OSCALObject nistSp800_53Rev4CatalogContents
 ]
 
 { #category : #accessing }

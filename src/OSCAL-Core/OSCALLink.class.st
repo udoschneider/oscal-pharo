@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OSCALLink class >> configureClassMapper: mapper [
+OSCALLink class >> mapToJsonMapper: mapper [
 	mapper
 		for: self
 		do: [ :mapping | 
@@ -22,14 +22,81 @@ OSCALLink class >> configureClassMapper: mapper [
 				valueSchema: #string ]
 ]
 
-{ #category : #printing }
-OSCALLink >> printOn: aStream [
-	super printOn: aStream.
-	aStream
-		space;
-		nextPut: $(;
-		nextPutAll: rel;
-		nextPutAll: ' -> ';
-		print: href;
-		nextPut: $)
+{ #category : #'as yet unclassified' }
+OSCALLink >> descriptionHref [
+	<magritteDescription>
+	^ super descriptionHref
+		priority: 20;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+OSCALLink >> descriptionMediatype [
+	<magritteDescription>
+	^ MAStringDescription new
+		label: 'Media Type' asMultilanguageString;
+		accessor: #mediaType;
+		beJsonMapped;
+		jsonProperty: 'media-type';
+		priority: 40;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+OSCALLink >> descriptionRel [
+	<magritteDescription>
+	^ MANcNameDescription new
+		label: 'Rel' asMultilanguageString;
+		accessor: #rel;
+		beJsonMapped;
+		priority: 30;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+OSCALLink >> descriptionText [
+	<magritteDescription>
+	^ super descriptionText
+		priority: 10;
+		yourself
+]
+
+{ #category : #accessing }
+OSCALLink >> href [
+	^ href
+]
+
+{ #category : #accessing }
+OSCALLink >> href: anUrl [
+	href := anUrl
+]
+
+{ #category : #accessing }
+OSCALLink >> mediaType [
+	^ mediaType
+]
+
+{ #category : #accessing }
+OSCALLink >> mediaType: aString [
+	mediaType := aString
+]
+
+{ #category : #accessing }
+OSCALLink >> rel [
+	^ rel
+]
+
+{ #category : #accessing }
+OSCALLink >> rel: aNCName [
+	rel := aNCName
+]
+
+{ #category : #accessing }
+OSCALLink >> text [
+	^ text
+]
+
+{ #category : #accessing }
+OSCALLink >> text: aMarkupLine [
+	text := aMarkupLine
 ]

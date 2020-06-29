@@ -32,7 +32,7 @@ OSCALTest >> write: data [
 		streamContents: [ :stream | 
 			| writer |
 			writer := NeoJSONWriter on: stream.
-			self class configureClassMapper: writer.
+			self class mapToJsonMapper: writer.
 			writer
 				prettyPrint: true;
 				nextPut: data ]
