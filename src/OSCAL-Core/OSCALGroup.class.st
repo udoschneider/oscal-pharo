@@ -16,24 +16,6 @@ Class {
 	#category : #'OSCAL-Core'
 }
 
-{ #category : #'as yet unclassified' }
-OSCALGroup class >> mapToJsonMapper: mapper [
-	mapper
-		for: self
-		do: [ :mapping | 
-			(mapping mapInstVar: #id) valueSchema: #ncname.
-			mapping mapOscalClass.
-			(mapping mapInstVar: #title) valueSchema: #'string-markup-line'.
-			mapping mapOscalParameters.
-			mapping mapOscalProperties.
-			mapping mapOscalAnnotations.
-			mapping mapOscalLinks.
-			mapping mapOscalParts.
-			mapping mapOscalGroups.
-			mapping mapOscalControls.
-			self ]
-]
-
 { #category : #accessing }
 OSCALGroup >> annotations [
 	^ annotations
@@ -52,86 +34,6 @@ OSCALGroup >> controls [
 { #category : #accessing }
 OSCALGroup >> controls: aCollection [
 	controls := aCollection
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionAnnotations [
-	<magritteDescription>
-	^ super descriptionAnnotations
-		priority: 60;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionClass [
-	<magritteDescription>
-	^ super descriptionClass
-		priority: 20;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionControls [
-	<magritteDescription>
-	^ super descriptionControls
-		priority: 100;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionGroups [
-	<magritteDescription>
-	^ super descriptionGroups
-		priority: 90;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionId [
-	<magritteDescription>
-	^ super descriptionId
-		priority: 10;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionLinks [
-	<magritteDescription>
-	^ super descriptionLinks
-		priority: 70;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionParameters [
-	<magritteDescription>
-	^ super descriptionParameters
-		priority: 40;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionParts [
-	<magritteDescription>
-	^ super descriptionParts
-		priority: 80;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionProperties [
-	<magritteDescription>
-	^ super descriptionProperties
-		priority: 50;
-		yourself
-]
-
-{ #category : #'magritte-description' }
-OSCALGroup >> descriptionTitle [
-	<magritteDescription>
-	^ super descriptionTitle
-		priority: 30;
-		yourself
 ]
 
 { #category : #accessing }

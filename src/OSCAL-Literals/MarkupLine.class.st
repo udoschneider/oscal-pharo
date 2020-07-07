@@ -1,5 +1,5 @@
 Class {
 	#name : #MarkupLine,
 	#superclass : #String,
-	#category : #'OSCAL-Core'
+	#category : #'OSCAL-Literals'
 }

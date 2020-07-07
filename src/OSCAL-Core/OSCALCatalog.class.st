@@ -13,20 +13,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OSCALCatalog class >> mapToJsonMapper_: mapper [
-	mapper
-		for: self
-		do: [ :mapping | 
-			mapping mapOscalUuid.
-			(mapping mapInstVar: #metadata) valueSchema: OSCALMetadata.
-			mapping mapOscalParameters.
-			mapping mapOscalControls.
-			mapping mapOscalGroups.
-			(mapping mapInstVar: #backmatter to: 'back-matter')
-				valueSchema: OSCALBackmatter ]
-]
-
-{ #category : #'as yet unclassified' }
 OSCALCatalog class >> nistSp800_53Rev4BaseUrl [
 	^ 'https://raw.githubusercontent.com/usnistgov/OSCAL/master/content/nist.gov/SP800-53/rev4/json'
 		asUrl
@@ -105,66 +91,6 @@ OSCALCatalog >> controls [
 { #category : #accessing }
 OSCALCatalog >> controls: aCollection [
 	controls := aCollection
-]
-
-{ #category : #'magritte descriptions' }
-OSCALCatalog >> descriptionBackmatter [
-	<magritteDescription>
-	^ MAToOneRelationDescription new
-		label: 'Backmatter' asMultilanguageString;
-		comment: 'Back matter including references and resources.';
-		accessor: #backmatter;
-		priority: 70;
-		classes: (Array with: OSCALBackmatter);
-		beJsonMapped;
-		jsonProperty: 'back-matter';
-		yourself
-]
-
-{ #category : #'magritte descriptions' }
-OSCALCatalog >> descriptionControls [
-	<magritteDescription>
-	^ super descriptionControls
-		priority: 40;
-		yourself
-]
-
-{ #category : #'magritte descriptions' }
-OSCALCatalog >> descriptionGroups [
-	<magritteDescription>
-	^ super descriptionGroups
-		priority: 50;
-		yourself
-]
-
-{ #category : #'magritte descriptions' }
-OSCALCatalog >> descriptionMetadata [
-	<magritteDescription>
-	^ MAToOneRelationDescription new
-		label: 'Metadata' asMultilanguageString;
-		comment:
-			'Provides information about the publication and availability of the containing document.';
-		accessor: #metadata;
-		priority: 20;
-		classes: (Array with: OSCALMetadata);
-		beJsonMapped;
-		yourself
-]
-
-{ #category : #'magritte descriptions' }
-OSCALCatalog >> descriptionParameters [
-	<magritteDescription>
-	^ super descriptionParameters
-		priority: 30;
-		yourself
-]
-
-{ #category : #'magritte descriptions' }
-OSCALCatalog >> descriptionUUID [
-	<magritteDescription>
-	^ super descriptionUUID
-		priority: 10;
-		yourself
 ]
 
 { #category : #accessing }

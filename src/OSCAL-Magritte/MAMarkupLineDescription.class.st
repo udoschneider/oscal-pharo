@@ -1,7 +1,7 @@
 Class {
 	#name : #MAMarkupLineDescription,
 	#superclass : #MAStringDescription,
-	#category : #'OSCAL-Core'
+	#category : #'OSCAL-Magritte'
 }
 
 { #category : #'as yet unclassified' }
